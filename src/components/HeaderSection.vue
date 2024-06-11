@@ -8,14 +8,14 @@ import { headerNav } from '@/constants'
       <h1 class="header__logo">
         <a href="#">Portfolio<em>vue.js</em></a>
       </h1>
-      <nav class="header__nav show" role="navigation" aria-label="메인 메뉴">
+      <nav class="header__nav" :class="{ show: isNavVisible }" role="navigation" aria-label="메인 메뉴">
         <ul>
           <li v-for="(nav, key) in headerNav" :key="key">
             <a :href="nav.url">{{ nav.title }}</a>
           </li>
         </ul>
       </nav>
-      <div class="header__nav__mobile" id="headerToggle" aria-controls="primary-menu" aria-expanded="false">
+      <div class="header__nav__mobile" id="headerToggle" aria-controls="primary-menu" aria-expanded="false" role="button" tabindex="0" @click="toggleMobileMenu">
         <span></span>
       </div>
     </div>
@@ -23,7 +23,18 @@ import { headerNav } from '@/constants'
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      isNavVisible: false
+    }
+  },
+  methods: {
+    toggleMobileMenu() {
+      this.isNavVisible = !this.isNavVisible
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -37,6 +48,7 @@ export default {}
     background-color: rgba(116, 99, 99, 0.1);
     backdrop-filter: blur(15px);
     padding: 1rem;
+    color: var(--white);
 
     .header__logo {
       font-size: 2rem;
@@ -47,7 +59,7 @@ export default {}
       em {
         font-size: 13px;
         display: block;
-        color: var(--black200);
+        color: var(--white);
       }
     }
     .header__nav {
@@ -129,7 +141,7 @@ export default {}
         display: block;
         width: 40px;
         height: 2px;
-        background-color: var(--black);
+        background-color: var(--white);
         margin-top: 19px;
         position: relative;
 
@@ -137,7 +149,7 @@ export default {}
           content: '';
           width: 40px;
           height: 2px;
-          background-color: var(--black);
+          background-color: var(--white);
           position: absolute;
           right: 0;
           top: 6px;
@@ -147,7 +159,7 @@ export default {}
           content: '';
           width: 40px;
           height: 2px;
-          background-color: var(--black);
+          background-color: var(--white);
           position: absolute;
           right: 0;
           bottom: 6px;
