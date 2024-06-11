@@ -45,6 +45,7 @@
       }
     }
     .header__nav {
+      display: none;
       li {
         display: inline;
 
@@ -74,7 +75,40 @@
       }
     }
     .header__nav__mobile {
-      display: none;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      background-color: #ccc;
+
+      span {
+        display: block;
+        width: 40px;
+        height: 2px;
+        background-color: var(--black);
+        margin-top: 19px;
+        position: relative;
+
+        &::before {
+          content: '';
+          width: 40px;
+          height: 2px;
+          background-color: var(--black);
+          position: absolute;
+          right: 0;
+          top: 6px;
+          transition: width 0.3s;
+        }
+        &::after {
+          content: '';
+          width: 40px;
+          height: 2px;
+          background-color: var(--black);
+          position: absolute;
+          right: 0;
+          bottom: 6px;
+          transition: width 0.3s;
+        }
+      }
     }
   }
 }
