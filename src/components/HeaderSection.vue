@@ -1,16 +1,18 @@
+<script setup>
+import { headerNav } from '@/constants'
+</script>
+
 <template>
   <header id="header" role="banner">
     <div class="header__inner">
       <h1 class="header__logo">
         <a href="#">Portfolio<em>vue.js</em></a>
       </h1>
-      <nav class="header__nav" role="navigation" aria-label="메인 메뉴">
+      <nav class="header__nav show" role="navigation" aria-label="메인 메뉴">
         <ul>
-          <li><a href="#intro">intro</a></li>
-          <li><a href="#skill">skill</a></li>
-          <li><a href="#site">site</a></li>
-          <li><a href="#portfolio">portfolio</a></li>
-          <li><a href="#contact">contact</a></li>
+          <li v-for="(nav, key) in headerNav" :key="key">
+            <a :href="nav.url">{{ nav.title }}</a>
+          </li>
         </ul>
       </nav>
       <div class="header__nav__mobile" id="headerToggle" aria-controls="primary-menu" aria-expanded="false">
@@ -19,6 +21,10 @@
     </div>
   </header>
 </template>
+
+<script>
+export default {}
+</script>
 
 <style lang="scss">
 @import '@/assets/scss/mixin';
@@ -45,7 +51,42 @@
       }
     }
     .header__nav {
-      display: none;
+      @media (max-width: 800px) {
+        display: none;
+
+        &.show {
+          display: block;
+
+          ul {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 68px;
+            background-color: rgba(116, 99, 99, 0.1);
+            backdrop-filter: blur(15px);
+            z-index: 10000;
+            min-width: 150px;
+            padding: 20px 0;
+
+            li {
+              display: block;
+              text-align: right;
+
+              a {
+                display: inline-block;
+                padding: 10px;
+              }
+            }
+          }
+        }
+
+        &.show + .header__nav__mobile span::before {
+          width: 20px;
+        }
+        &.show + .header__nav__mobile span::after {
+          width: 20px;
+        }
+      }
       li {
         display: inline;
 
@@ -77,8 +118,12 @@
     .header__nav__mobile {
       width: 40px;
       height: 40px;
+      display: none;
       cursor: pointer;
-      background-color: #ccc;
+
+      @media (max-width: 800px) {
+        display: block;
+      }
 
       span {
         display: block;
