@@ -55,7 +55,7 @@ export default {
 #port {
   width: 100%;
   margin-top: 30vh;
-  // overflow: hidden;
+  overflow: hidden;
 }
 .port__inner {
   padding: 16px;
